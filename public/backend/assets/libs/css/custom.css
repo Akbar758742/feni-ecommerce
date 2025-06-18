@@ -1,0 +1,18 @@
+.logout-item{
+        display: block;
+    width: 100%;
+    clear: both;
+    font-weight: 400;
+    color: rgb(104, 105, 114);
+    text-align: inherit;
+    background-color: transparent;
+    font-size: 13px;
+    line-height: 0.4;
+    padding: 12px 22px 15px;
+    white-space: nowrap;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+

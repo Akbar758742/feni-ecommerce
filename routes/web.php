@@ -8,7 +8,7 @@ use App\Http\Controllers\Backend\DashboardController    ;
 Route::get('/',[FrontendController::class,'index'])->name('index');
 
 Route::get('/product-details', [FrontendController::class,'productDetails'])->name('product.details');
-Route::get('/dashboard', [DashboardController::class,'dashboard'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
 
 
 // Route::get('/dashboard', function () {
