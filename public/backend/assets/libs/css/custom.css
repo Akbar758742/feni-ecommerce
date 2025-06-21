@@ -16,3 +16,18 @@
     border-image: initial;
 }
 
+.table-card  a{
+        color: rgb(104, 105, 114);
+    text-decoration: none;
+    /* margin:10px */
+
+}
+
+.table-card .add-new-btn{
+
+    margin: 15px 10px 0 0;
+}
+
+.card-header{
+    border-bottom: 0 !important;
+}
