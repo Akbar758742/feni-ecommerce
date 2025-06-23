@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Models\Backend\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\category\StorePostRequest;
+use App\Http\Requests\category\UpdateStorePostRequest;
 
 class CategoryController extends Controller
 {
@@ -17,7 +19,7 @@ class CategoryController extends Controller
         return view('backend.category.create');
     }
 
-    public function store(Request $request){
+    public function store(StorePostRequest $request){
 
         $category = new Category();
         $category->name = request('name');
@@ -34,7 +36,7 @@ class CategoryController extends Controller
         $category=Category::find($id);
         return view('backend.category.edit',compact('category'));
     }
-    public function update(Request $request, $id){
+    public function update(UpdateStorePostRequest $request, $id){
         $category = Category::find($id);
         $category->name = $request->name;
         $category->status = $request->status;

@@ -24,11 +24,17 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Name</label>
-                                <input id="inputText3" name="name" type="text" value="{{ $category->name }}" class="form-control">
+                                <input id="inputText3" name="name" type="text" value="{{ $category->name }}" class="form-control @error('title') is-invalid @enderror">
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">order</label>
-                                <input id="inputText3" name="order" type="text" value="{{ $category->order }}" class="form-control">
+                                <input id="inputText3" name="order" type="text" value="{{ $category->order }}" class="form-control  @error('order') is-invalid @enderror ">
+                                @error('order')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">status</label>

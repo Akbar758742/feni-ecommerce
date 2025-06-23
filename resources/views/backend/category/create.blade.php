@@ -10,11 +10,11 @@
                     <p>Use custom button styles for actions in forms, dialogs, and more with support for multiple sizes,
                         states, and more.</p>
                 </div>
-                  @if (Session::has('success'))
-                        {{ Session::get('success') }}
-                    @elseif(Session::has('danger'))
-                        {{ Session::get('danger') }} <!-- here to 'withWarning()' -->
-                    @endif
+                @if (Session::has('success'))
+                    {{ Session::get('success') }}
+                @elseif(Session::has('danger'))
+                    {{ Session::get('danger') }} <!-- here to 'withWarning()' -->
+                @endif
                 <div class="card">
 
                     <h5 class="card-header">add new</h5>
@@ -23,11 +23,22 @@
                             @csrf
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Name</label>
-                                <input id="inputText3" name="name" type="text" class="form-control">
+                                <input id="inputText3" name="name" type="text"
+                                    class="form-control @error('title') is-invalid @enderror">
+                                @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+
                             </div>
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">order</label>
-                                <input id="inputText3" name="order" type="text" class="form-control">
+                                <label for="inputText3" class="col-form-label ">order</label>
+                                <input id="inputText3" name="order" type="text"
+                                    class="form-control @error('order') is-invalid @enderror">
+                                @error('order')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
                             </div>
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">status</label>
