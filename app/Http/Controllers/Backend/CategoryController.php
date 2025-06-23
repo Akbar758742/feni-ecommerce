@@ -30,6 +30,26 @@ class CategoryController extends Controller
 
         //
     }
+    public function edit($id){
+        $category=Category::find($id);
+        return view('backend.category.edit',compact('category'));
+    }
+    public function update(Request $request, $id){
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->status = $request->status;
+        $category->order = $request->order;
+        if($category->save()){
+            return redirect(route('category'))->with('success','Category updated successfully');
+        }
+        return redirect()->back()->with('danger','Category not updated');
+    }
 
-
-}
+    public function destroy($id){
+        $category = Category::destroy($id);
+        if($category){
+            return redirect(route('category'))->with('success','Category deleted successfully');
+        }
+        return redirect()->back()->with('danger','Category not deleted');
+        }
+    }

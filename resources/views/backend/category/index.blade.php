@@ -63,10 +63,10 @@
                                 <tr>
                                     <th scope="row">{{ $category->name }}</th>
                                     <td>{{ $category->order }}</td>
-                                    <td>{{ $category->status==1?'Active':'Inactive' }}</td>
+                                    <td class="{{ $category->status == 1 ? 'text-success' : 'text-danger' }}">{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <a href="" class="btn btn-info text-white .table-card">Edit</a>
-                                        <a href="" class="btn btn-warning text-white .table-card">Delete</a>
+                                        <a href="{{ route('category.edit', $category->id) }}" class="btn btn-info text-white .table-card">Edit</a>
+                                        <a href="{{ route('category.destroy', $category->id) }}" onclick="return confirm('Are you sure you want to delete this category?')" class="btn btn-warning text-white .table-card">Delete</a>
                                     </td>
                                 </tr>
                                  @endforeach
