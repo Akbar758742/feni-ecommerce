@@ -42,7 +42,7 @@
                             <h5 class="card-header">category list</h5>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="{{ route('category.create') }}" class="btn btn-primary text-white add-new-btn">Add new</a>
+                            <a href="{{ route('sub-category.create') }}" class="btn btn-primary text-white add-new-btn">Add new</a>
                         </div>
                     </div>
 
@@ -52,23 +52,25 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">name</th>
-                                    <th scope="col">order</th></th>
+                                    <th scope="col">category</th>
+                                    <th scope="col">order</th>
                                     <th scope="col">status</th>
                                     <th scope="col">action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($subCategories as $subCategory)
 
 
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->order }}</td>
-                                    <td class="{{ $category->status == 1 ? 'text-success' : 'text-danger' }}">{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
+                                    <td>{{ $subCategory->name }}</td>
+                                    <td>{{ $subCategory->category->name }}</td>
+                                    <td>{{ $subCategory->order }}</td>
+                                    <td class="{{ $subCategory->status == 1 ? 'text-success' : 'text-danger' }}">{{ $subCategory->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <a href="{{ route('category.edit', $category->id) }}" class="btn btn-info text-white .table-card">Edit</a>
-                                        <a href="{{ route('category.destroy', $category->id) }}" onclick="return confirm('Are you sure you want to delete this category?')" class="btn btn-warning text-white .table-card">Delete</a>
+                                        <a href="{{ route('sub-category.edit', $subCategory->id) }}" class="btn btn-info text-white .table-card">Edit</a>
+                                        <a href="{{ route('sub-category.destroy', $subCategory->id) }}" onclick="return confirm('Are you sure you want to delete this sub-category?')" class="btn btn-warning text-white .table-card">Delete</a>
                                     </td>
                                 </tr>
                                  @endforeach
@@ -76,7 +78,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
- {{ $categories->links() }}
+ {{ $subCategories->links() }}
                         </div>
 
                     </div>

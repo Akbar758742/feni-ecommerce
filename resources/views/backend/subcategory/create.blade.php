@@ -19,7 +19,7 @@
 
                     <h5 class="card-header">add new</h5>
                     <div class="card-body">
-                        <form action="{{ route('category.store') }}" method="POST">
+                        <form action="{{ route('sub-category.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label">Name</label>
@@ -30,6 +30,15 @@
                                 @enderror
 
 
+                            </div>
+                             <div class="form-group">
+                                <label for="inputText3" class="col-form-label">category</label>
+                                <select name="category" id="inputText3" class="form-control">
+                                    <option>select category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="inputText3" class="col-form-label ">order</label>
