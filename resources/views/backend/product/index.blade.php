@@ -39,10 +39,10 @@
                     <div class="row">
 
                         <div class="col-6">
-                            <h5 class="card-header">category list</h5>
+                            <h5 class="card-header">product list</h5>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="{{ route('category.create') }}" class="btn btn-primary text-white add-new-btn">Add new</a>
+                            <a href="{{ route('product.create') }}" class="btn btn-primary text-white add-new-btn">Add new</a>
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($products as $category)
 
 
                                 <tr>
@@ -67,8 +67,8 @@
                                     <td>{{ $category->order }}</td>
                                     <td class="{{ $category->status == 1 ? 'text-success' : 'text-danger' }}">{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <a href="{{ route('product.edit', $category->id) }}" class="btn btn-info text-white .table-card">Edit</a>
-                                        <a href="{{ route('product.destroy', $category->id) }}" onclick="return confirm('Are you sure you want to delete this category?')" class="btn btn-warning text-white .table-card">Delete</a>
+                                        <a href="{{ route('category.edit', $category->id) }}" class="btn btn-info text-white .table-card">Edit</a>
+                                        <a href="{{ route('category.destroy', $category->id) }}" onclick="return confirm('Are you sure you want to delete this category?')" class="btn btn-warning text-white .table-card">Delete</a>
                                     </td>
                                 </tr>
                                  @endforeach
@@ -76,7 +76,7 @@
                             </tbody>
                         </table>
                         <div class="d-flex justify-content-center">
- {{ $categories->links() }}
+ {{ $products->links() }}
                         </div>
 
                     </div>
