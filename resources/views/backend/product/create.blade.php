@@ -19,7 +19,7 @@
 
                     <h5 class="card-header">add new</h5>
                     <div class="card-body">
-                        <form action="{{ route('category.store') }}" method="POST">
+                        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
 
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="inputText3" class="col-form-label ">image</label>
-                                    <input id="inputText3" name="image" type="file" multiple class="form-control">
+                                    <input id="inputText3" name="image[]" type="file" multiple class="form-control">
 
 
                                 </div>
@@ -124,10 +124,10 @@
 
                                 <div class="form-group col-6">
                                     <label for="category" class="col-form-label">category</label>
-                                    <select name="category" id="category" class="form-control">
+                                    <select name="category_id" id="category" class="form-control">
                                         <option value="">select category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                         @endforeach
 
 

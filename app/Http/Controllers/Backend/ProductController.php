@@ -7,23 +7,65 @@ use App\Models\Backend\Product;
 use App\Models\Backend\Category;
 use App\Models\Backend\SubCategory;
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Upload;
 
 class ProductController extends Controller
 {
     public function index()
     {
 
-        $products= Product::orderbydesc('id')->paginate(5);
+        $products = Product::orderbydesc('id')->paginate(5);
         return view('backend.product.index', compact('products'));
     }
 
     public function create()
-    {       $categories = Category::orderbydesc('id')->where('status', '1')->get();
+    {
+        $categories = Category::orderbydesc('id')->where('status', '1')->get();
         return view('backend.product.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
+
+
+        $row=new Product();
+        $row->name = $request->name;
+        $row->short_description = $request->short_description;
+        $row->description = $request->description;
+        $row->product_details = $request->product_details;
+        $row->quantity = $request->quantity;
+        $row->price = $request->price;
+        $row->discount = $request->discount;
+        $row->delivery_policy = $request->delivery_policy;
+        $row->return_policy = $request->return_policy;
+        $row->category_id= $request->category_id;
+        $row->sub_category_id = $request->sub_category_id;
+
+        $row->status = $request->status;
+        $row->order = $request->order;  
+        $row->save();    
+
+        $images = $request->file('image');
+        $arr = [];
+
+        if ($request->hasFile('image')) {
+            foreach ($images as $item) {
+                $var = date_create();
+                $time = date_format($var, 'YmdHis');
+                $imageName = $time . '-' . $item->getClientOriginalName();
+                $item->move(public_path() . '/uploads/file/', $imageName);
+                $arr[] = $imageName;
+
+                $upload = new Upload();
+               
+               
+                $upload->file_path = '/uploads/file/'.$imageName;
+                $upload->product_id = $row->id; // Associate with the product
+                // $upload->type = 'product'; // Specify the type if needed
+                $upload->save();
+            }
+        }
+          
 
         $category = new Category();
         $category->name = request('name');
