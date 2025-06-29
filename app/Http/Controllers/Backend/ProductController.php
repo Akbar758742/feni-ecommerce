@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Models\Backend\Upload;
 use App\Models\Backend\Product;
 use App\Models\Backend\Category;
+use Illuminate\Support\Facades\DB;
 use App\Models\Backend\SubCategory;
 use App\Http\Controllers\Controller;
-use App\Models\Backend\Upload;
 
 class ProductController extends Controller
 {
@@ -28,60 +29,74 @@ class ProductController extends Controller
     {
 
 
-        $row=new Product();
-        $row->name = $request->name;
-        $row->short_description = $request->short_description;
-        $row->description = $request->description;
-        $row->product_details = $request->product_details;
-        $row->quantity = $request->quantity;
-        $row->price = $request->price;
-        $row->discount = $request->discount;
-        $row->delivery_policy = $request->delivery_policy;
-        $row->return_policy = $request->return_policy;
-        $row->category_id= $request->category_id;
-        $row->sub_category_id = $request->sub_category_id;
+        DB::beginTransaction();
 
-        $row->status = $request->status;
-        $row->order = $request->order;  
-        $row->save();    
+        try {
+            $row = new Product();
+            $row->name = $request->name;
+            $row->short_description = $request->short_description;
+            $row->description = $request->description;
+            $row->product_details = $request->product_details;
+            $row->quantity = $request->quantity;
+            $row->price = $request->price;
+            $row->discount = $request->discount;
+            $row->delivery_policy = $request->delivery_policy;
+            $row->return_policy = $request->return_policy;
+            $row->category_id = $request->category_id;
+            $row->sub_category_id = $request->sub_category_id;
 
-        $images = $request->file('image');
-        $arr = [];
+            $row->status = $request->status;
+            $row->order = $request->order;
+            $row->save();
 
-        if ($request->hasFile('image')) {
-            foreach ($images as $item) {
-                $var = date_create();
-                $time = date_format($var, 'YmdHis');
-                $imageName = $time . '-' . $item->getClientOriginalName();
-                $item->move(public_path() . '/uploads/file/', $imageName);
-                $arr[] = $imageName;
+            $images = $request->file('image');
+            $arr = [];
 
-                $upload = new Upload();
-               
-               
-                $upload->file_path = '/uploads/file/'.$imageName;
-                $upload->product_id = $row->id; // Associate with the product
-                // $upload->type = 'product'; // Specify the type if needed
-                $upload->save();
+            if ($request->hasFile('images')) {
+                foreach ($images as $item) {
+                    $var = date_create();
+                    $time = date_format($var, 'YmdHis');
+                    $imageName = $time . '-' . $item->getClientOriginalName();
+                    $item->move(public_path() . '/uploads/file/', $imageName);
+                    $arr[] = $imageName;
+
+                    $upload = new Upload();
+
+
+                    $upload->file_path = '/uploads/file/' . $imageName;
+                    $upload->product_id = $row->id; // Associate with the product
+                    // $upload->type = 'product'; // Specify the type if needed
+                    $upload->save();
+                }
             }
-        }
-          
 
-        $category = new Category();
-        $category->name = request('name');
-        $category->status = request('status');
-        $category->order = request('order');
-        if ($category->save()) {
+
+            $category = new Category();
+            $category->name = request('name');
+            $category->status = request('status');
+            $category->order = request('order');
+
+            DB::commit();
+
             return redirect(route('product'))->with('success', 'product added successfully');
+        } catch (\Exception $e) {
+
+
+            DB::rollback();
+
+            return redirect()->back()->with('danger', 'product not added');
         }
-        return redirect()->back()->with('danger', 'product not added');
+
 
         //
     }
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('backend.product.edit', compact('category'));
+        $category = Product::find($id);
+        $categories = Category::orderbydesc('id')->where('status', '1')->get();
+        $subcategories = SubCategory::orderbydesc('id')->where('status', '1')->get();
+
+        return view('backend.product.edit', compact('category', 'categories', 'subcategories'));
     }
     public function update(Request $request, $id)
     {

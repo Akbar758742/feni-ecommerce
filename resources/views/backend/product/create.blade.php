@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="inputText3" class="col-form-label ">quantity</label>
-                                    <input id="inputText3" name="quantity" type="text"
+                                    <input id="inputText3" name="quantity" type="number"
                                         class="form-control @error('quantity') is-invalid @enderror">
                                     @error('quantity')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="inputText3" class="col-form-label ">price</label>
-                                    <input id="inputText3" name="price" type="text"
+                                    <input id="inputText3" name="price" type="number"
                                         class="form-control @error('price') is-invalid @enderror">
                                     @error('price')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="inputText3" class="col-form-label ">discount (%)</label>
-                                    <input id="inputText3" name="discount" type="text"
+                                    <input id="inputText3" name="discount" type="number"
                                         class="form-control @error('discount') is-invalid @enderror">
                                     @error('discount')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="inputText3" class="col-form-label ">order</label>
-                                    <input id="inputText3" name="order" type="text"
+                                    <input id="inputText3" name="order" type="number"
                                         class="form-control @error('order') is-invalid @enderror">
                                     @error('order')
                                         <div class="alert alert-danger">{{ $message }}</div>
