@@ -64,7 +64,7 @@
                             <tbody>
                                 @foreach ($products as $row)
                                     <tr>
-                                     
+
 
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ $row->name }}</td>
@@ -76,7 +76,7 @@
                                                     style="width: 50px; height: 50px;">
                                             @endforeach
                                         </td>
-                                        <td>{{ $row->name }}</td>
+                                      
                                         <td>{{ $row->order }}</td>
                                         <td class="{{ $row->status == 1 ? 'text-success' : 'text-danger' }}">
                                             {{ $row->status == 1 ? 'Active' : 'Inactive' }}</td>

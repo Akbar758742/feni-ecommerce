@@ -136,7 +136,7 @@
 
                                 <div class="form-group col-6">
                                     <label for="subcategory" class="col-form-label">sub category</label>
-                                    <select name="subcategory" id="sub_category" class="form-control">
+                                    <select name="sub_category_id" id="sub_category" class="form-control">
                                         <option value="">select sub category</option>
 
                                     </select>

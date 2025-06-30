@@ -52,7 +52,7 @@ class ProductController extends Controller
             $images = $request->file('image');
             $arr = [];
 
-            if ($request->hasFile('images')) {
+            if ($request->hasFile('image')) {
                 foreach ($images as $item) {
                     $var = date_create();
                     $time = date_format($var, 'YmdHis');
@@ -92,11 +92,11 @@ class ProductController extends Controller
     }
     public function edit($id)
     {
-        $category = Product::find($id);
-        $categories = Category::orderbydesc('id')->where('status', '1')->get();
+        $product = Product::find($id);
+        $categories = Category::all();
         $subcategories = SubCategory::orderbydesc('id')->where('status', '1')->get();
 
-        return view('backend.product.edit', compact('category', 'categories', 'subcategories'));
+        return view('backend.product.edit', compact('product', 'categories', 'subcategories'));
     }
     public function update(Request $request, $id)
     {
