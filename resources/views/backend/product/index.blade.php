@@ -76,14 +76,14 @@
                                                     style="width: 50px; height: 50px;">
                                             @endforeach
                                         </td>
-                                      
+
                                         <td>{{ $row->order }}</td>
                                         <td class="{{ $row->status == 1 ? 'text-success' : 'text-danger' }}">
                                             {{ $row->status == 1 ? 'Active' : 'Inactive' }}</td>
                                         <td>
                                             <a href="{{ route('product.edit', $row->id) }}"
                                                 class="btn btn-info text-white .table-card">Edit</a>
-                                            <a href="{{ route('category.destroy', $row->id) }}"
+                                            <a href="{{ route('product.destroy', $row->id) }}"
                                                 onclick="return confirm('Are you sure you want to delete this category?')"
                                                 class="btn btn-warning text-white .table-card">Delete</a>
                                         </td>

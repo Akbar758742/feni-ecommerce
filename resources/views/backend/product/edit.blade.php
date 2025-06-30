@@ -21,6 +21,7 @@
                     <div class="card-body">
                         <form action="{{ route('product.update',$product->id )}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row">
 
 
@@ -130,7 +131,7 @@
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" {{ $product->category_id==$category->id? 'selected':'' }} >{{ $category->name }}</option>
                                         @endforeach
-                                        @endif 
+                                        @endif
 
 
                                     </select>

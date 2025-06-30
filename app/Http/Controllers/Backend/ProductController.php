@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::orderbydesc('id')->paginate(5);
+        $products = Product::orderbydesc('id')->with('images')->paginate(5);
         return view('backend.product.index', compact('products'));
     }
 
@@ -100,20 +100,92 @@ class ProductController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->status = $request->status;
-        $category->order = $request->order;
-        if ($category->save()) {
-            return redirect(route('category'))->with('success', 'Category updated successfully');
+        DB::beginTransaction();
+
+        try {
+            $row = Product::find($id);
+            $row->name = $request->name;
+            $row->short_description = $request->short_description;
+            $row->description = $request->description;
+            $row->product_details = $request->product_details;
+            $row->quantity = $request->quantity;
+            $row->price = $request->price;
+            $row->discount = $request->discount;
+            $row->delivery_policy = $request->delivery_policy;
+            $row->return_policy = $request->return_policy;
+            $row->category_id = $request->category_id;
+            $row->sub_category_id = $request->sub_category_id;
+
+            $row->status = $request->status;
+            $row->order = $request->order;
+            $row->save();
+
+            $images = $request->file('image');
+            $arr = [];
+
+
+            if ($request->hasFile('image')) {
+                 foreach ($row->images as $item) {
+                    $upload=Upload::find($item->id);
+                    $filePath = public_path($upload->file_path);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                    $upload->delete();
+
+                 }
+
+                foreach ($images as $item) {
+                    $var = date_create();
+                    $time = date_format($var, 'YmdHis');
+                    $imageName = $time . '-' . $item->getClientOriginalName();
+                    $item->move(public_path() . '/uploads/file/', $imageName);
+                    $arr[] = $imageName;
+
+                    $upload = new Upload();
+
+
+                    $upload->file_path = '/uploads/file/' . $imageName;
+                    $upload->product_id = $row->id; // Associate with the product
+                    // $upload->type = 'product'; // Specify the type if needed
+                    $upload->save();
+                }
+            }
+
+
+            $category = new Category();
+            $category->name = request('name');
+            $category->status = request('status');
+            $category->order = request('order');
+
+            DB::commit();
+
+            return redirect(route('product'))->with('success', 'update successfully');
+        } catch (\Exception $e) {
+            // dd($e);
+
+
+            DB::rollback();
+
+            return redirect()->back()->with('danger', 'product not updated');
         }
-        return redirect()->back()->with('danger', 'Category not updated');
+
+
     }
 
     public function destroy($id)
     {
-        $category = Category::destroy($id);
-        if ($category) {
+        $Product = Product::find($id);
+
+        if ($Product) {
+            foreach ($Product->images as $item) {
+            $upload=Upload::find($item->id);
+            $filePath = public_path($upload->file_path);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+
+        } $Product->delete();
             return redirect(route('product'))->with('success', 'product deleted successfully');
         }
         return redirect()->back()->with('danger', 'product not deleted');
