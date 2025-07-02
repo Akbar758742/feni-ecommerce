@@ -11,7 +11,7 @@ use App\Http\Controllers\Backend\DashboardController    ;
 
 Route::get('/',[FrontendController::class,'index'])->name('index');
 
-Route::get('/product-details', [FrontendController::class,'productDetails'])->name('product.details');
+Route::get('/product-details/{id}', [FrontendController::class,'productDetails'])->name('product.details');
 
 
 

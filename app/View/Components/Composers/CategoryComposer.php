@@ -8,7 +8,7 @@ class CategoryComposer
 {
     public function compose(View $view)
     {
-        $categories = Category::with('subcategories')->orderbydesc('order')->where('status', '1')->get();
+        $categories = Category::with('subcategories')->withCount('subcategories')->orderbydesc('order')->where('status', '1')->get();
         $view->with('categories', $categories);
     }
 }

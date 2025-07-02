@@ -12,4 +12,8 @@ class Product extends Model
    {
        return $this->hasMany(Upload::class, 'product_id', 'id');
    }
+    public function firstImage()
+   {
+       return $this->hasOne(Upload::class, 'product_id', 'id');
+   }
 }
