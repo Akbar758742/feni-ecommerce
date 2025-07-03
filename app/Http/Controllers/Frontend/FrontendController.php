@@ -14,6 +14,8 @@ class FrontendController extends Controller
         {
             $categories=Category::with('products')->withCount('products')->where('status',1)->get();
 
+  
+           
             return view('frontend.home',compact('categories'));
 
         }

@@ -24,18 +24,22 @@ class ProductSeeder extends Seeder
                 'return_policy' => fake()->sentence(),
                 'price' => fake()->randomFloat(2, 100, 5000),
                 'quantity' => rand(1, 100),
-                'category_id' => 1, // Make sure you have categories and sub_categories seeded!
-                'sub_category_id' => 1,
+                'category_id' =>fake()->numberBetween(1,5) , // Make sure you have categories and sub_categories seeded!
+                'sub_category_id' =>fake()->numberBetween(1,15) , // Make sure you have categories and sub_categories seeded!
+               
                 'status' => true,
                 'order' => $i,
             ]);
-        }
-        // Add a related file upload
-        for ($j = 1; $j <= 9; $j++) {
-            Upload::create([
-                'file_path' => "uploads/file/product-image-" . rand(1, 6) . '.jpg',
-                'product_id' => $product->id,
-            ]);
+
+
+
+            //  Add a related file upload
+            for ($j = 1; $j <= 5; $j++) {
+                Upload::create([
+                    'file_path' => "uploads/file/product-image-" . rand(1, 9) . '.jpg',
+                    'product_id' => $product->id,
+                ]);
+            }
         }
     }
 }

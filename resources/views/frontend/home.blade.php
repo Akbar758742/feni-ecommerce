@@ -80,75 +80,73 @@
             <div class="row">
                 <!-- Begin Li's Section Area -->
                 <div class="col-lg-12">
-                    @foreach ( $categories as $category )
-                    @if ($category->products_count !=0)
-                     <div class="li-section-title">
-                        <h2>
-                            <span>{{  $category ->name }}</span>
-                        </h2>
-
-                    </div>
-                    <div class="row">
-                        <div class="product-active owl-carousel">
-                            @foreach ( $category->products as $product )
-
-
-                            <div class="col-lg-12">
-                                <!-- single-product-wrap start -->
-                                <div class="single-product-wrap">
-                                    <div class="product-image">
-                                        <a href="{{ route("product.details",$product->id) }}">
-                                            <img src="{{ asset($product->firstImage->file_path) }}"
-                                                alt="Li's Product Image">
-                                        </a>
-
-                                    </div>
-                                    <div class="product_desc">
-                                        <div class="product_desc_info">
-                                            <div class="product-review">
-                                                <h5 class="manufacturer">
-                                                    <a href="{{ route("product.details",$product->id) }}">{{ $product->name }}</a>
-                                                </h5>
-                                                <div class="rating-box">
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                        <li class="no-star"><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <h4><a class="product_name" href="{{ route("product.details",$product->id) }}">{{ $product->name }} </a>
-                                            </h4>
-                                            <div class="price-box">
-                                                <span class="new-price">{{ $product->price }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="add-actions">
-                                            <ul class="add-actions-link">
-                                                <li class="add-cart active"><a href="#">Add to cart</a></li>
-                                                <li><a class="links-details" href="wishlist.html"><i
-                                                            class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" title="quick view" class="quick-view-btn"
-                                                        data-toggle="modal" data-target="#exampleModalCenter"><i
-                                                            class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single-product-wrap end -->
+                    @foreach ($categories as $category)
+                        @if ($category->products_count != 0)
+                            <div class="li-section-title">
+                                <h2>
+                                    <span>{{ $category->name }}</span>
+                                </h2>
 
                             </div>
-                             @endforeach
-                        </div>
-                    </div>
+                            <div class="row">
+                                <div class="product-active owl-carousel">
+                                    @foreach ($category->products as $product)
+                                        <div class="col-lg-12">
+                                            <!-- single-product-wrap start -->
+                                            <div class="single-product-wrap">
+                                                <div class="product-image">
+                                                    <a href="{{ route('product.details', $product->id) }}">
+                                                        <img src="{{ $product->firstImage ? asset($product->firstImage->file_path) : asset('frontend/images/no-image.png') }}"
+                                                            alt="Li's Product Image">
+                                                    </a>
 
-                    @endif
+                                                </div>
+                                                <div class="product_desc">
+                                                    <div class="product_desc_info">
+                                                        <div class="product-review">
+                                                            <h5 class="manufacturer">
+                                                                <a
+                                                                    href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a>
+                                                            </h5>
+                                                            <div class="rating-box">
+                                                                <ul class="rating">
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li><i class="fa fa-star-o"></i></li>
+                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                    <li class="no-star"><i class="fa fa-star-o"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <h4><a class="product_name"
+                                                                href="{{ route('product.details', $product->id) }}">{{ $product->name }}
+                                                            </a>
+                                                        </h4>
+                                                        <div class="price-box">
+                                                            <span class="new-price">{{ $product->price }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-actions">
+                                                        <ul class="add-actions-link">
+                                                            <li class="add-cart active"><a href="#">Add to cart</a>
+                                                            </li>
+                                                            <li><a class="links-details" href="wishlist.html"><i
+                                                                        class="fa fa-heart-o"></i></a></li>
+                                                            <li><a href="#" title="quick view" class="quick-view-btn"
+                                                                    data-toggle="modal" data-target="#exampleModalCenter"><i
+                                                                        class="fa fa-eye"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single-product-wrap end -->
 
-
-
-                     @endforeach
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                     <!-- Li's Section Area End Here -->
                 </div>
             </div>
