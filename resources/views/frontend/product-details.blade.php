@@ -80,7 +80,9 @@
                                         </div>
                                     </div>
                                     <div class="single-add-to-cart">
-                                        <form action="#" class="cart-quantity">
+                                        <form action="{{ route('add.to.cart') }}" class="cart-quantity" method="POST">
+                                            @csrf
+
                                             <div class="quantity">
                                                 <label>Quantity</label>
                                                 <div class="cart-plus-minus">

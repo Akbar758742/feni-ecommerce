@@ -12,6 +12,12 @@ use App\Http\Controllers\Backend\DashboardController    ;
 Route::get('/',[FrontendController::class,'index'])->name('index');
 
 Route::get('/product-details/{id}', [FrontendController::class,'productDetails'])->name('product.details');
+Route::post('/add-to-cart/', [FrontendController::class,'addToCart'])->name('add.to.cart');
+Route::get('/user-login', [FrontendController::class,'userLogin'])->name('user.login');
+Route::post('/user-register', [FrontendController::class,'userRegister'])->name('user.register');
+
+
+
 
 
 
