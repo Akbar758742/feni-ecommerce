@@ -15,6 +15,7 @@ Route::get('/product-details/{id}', [FrontendController::class,'productDetails']
 Route::post('/add-to-cart/', [FrontendController::class,'addToCart'])->name('add.to.cart');
 Route::get('/user-login', [FrontendController::class,'userLogin'])->name('user.login');
 Route::post('/user-register', [FrontendController::class,'userRegister'])->name('user.register');
+Route::get('/otp/verification/{otp}', [FrontendController::class,'otpVerification']);
 
 
 

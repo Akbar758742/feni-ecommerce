@@ -54,12 +54,28 @@ class FrontendController extends Controller
             $user->name=$request->name;
             $user->mobile=$request->mobile;
             $user->email=$request->email;
+            $user->otp=rand(10000,99999);
             $user->password=Hash::make($request->password);
             $user->save();
 
-            Mail::to($request->email)->send(new verificationEmail());
+            Mail::to($request->email)->send(new verificationEmail($user->otp));
 
             return back()->with('success','register successfully');
+        }
+
+        public function otpVerification($otp)
+        {
+          $user=User::where('otp',$otp)->first();
+          if($user)
+          {
+            $user->email_verified_at=date('Y-m-d H:i:s');
+            $user->save();
+            return redirect('user-login')->with('success','Email verified successfully');
+          }
+          else
+          {
+            return back()->with('error','Invalid OTP');
+          }
         }
 
 

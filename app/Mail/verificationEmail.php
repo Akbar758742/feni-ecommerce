@@ -16,9 +16,10 @@ class verificationEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $otp;
+    public function __construct($otp)
     {
-        //
+        $this->otp=$otp;
     }
 
     /**
@@ -36,6 +37,7 @@ class verificationEmail extends Mailable
      */
     public function content(): Content
     {
+        
         return new Content(
             view: 'frontend.auth.verification',
         );
