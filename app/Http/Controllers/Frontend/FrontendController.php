@@ -78,5 +78,27 @@ class FrontendController extends Controller
           }
         }
 
+        public function userLoginPost( Request $request){
+
+            $user=User::where('email',$request->email)->first();
+            if($user->email_verified_at==null)
+            {
+                return back()->with('danger','Email not verified');
+            }
+
+            $credentials=[
+                'email'=>$request->email,
+                'password'=>$request->password
+            ];
+            if(Auth::attempt($credentials))
+            {
+                return redirect('/')->with('success','Login successfully');
+            }
+            else
+            {
+                return back()->with('error','Invalid credentials');
+            }
+
+        }
 
 }
