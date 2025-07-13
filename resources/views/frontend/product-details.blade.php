@@ -15,6 +15,11 @@
             </div>
             <!-- Li's Breadcrumb Area End Here -->
             <!-- content-wraper start -->
+             @if (Session::has('success'))
+                    <p class="alert alert-success">{{ Session::get('success') }}</p>
+                @elseif(Session::has('danger'))
+                    <p class="alert alert-danger">{{ Session::get('danger') }}</p>
+                @endif
             <div class="content-wraper">
                 <div class="container">
                     <div class="row single-product-area">
@@ -82,11 +87,12 @@
                                     <div class="single-add-to-cart">
                                         <form action="{{ route('add.to.cart') }}" class="cart-quantity" method="POST">
                                             @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                                             <div class="quantity">
                                                 <label>Quantity</label>
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" value="1" type="text">
+                                                    <input class="cart-plus-minus-box" value="1" name="quantity" type="text">
                                                     <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                     <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                 </div>

@@ -8,6 +8,7 @@ use App\Mail\verificationEmail;
 use App\Models\Backend\Product;
 use App\Models\Backend\Category;
 use App\Http\Controllers\Controller;
+use App\Models\shoppingCart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -31,16 +32,7 @@ class FrontendController extends Controller
             return view('frontend.product-details',compact('product'));
         }
 
-        public function addToCart(Request $request)
-        {
-            if(!Auth::check())
-            {
-                return redirect("user-login");
-            }
 
-
-
-        }
 
         public function userLogin()
         {
@@ -54,6 +46,7 @@ class FrontendController extends Controller
             $user->name=$request->name;
             $user->mobile=$request->mobile;
             $user->email=$request->email;
+            $user->user_type='customer';
             $user->otp=rand(10000,99999);
             $user->password=Hash::make($request->password);
             $user->save();
@@ -74,7 +67,7 @@ class FrontendController extends Controller
           }
           else
           {
-            return back()->with('error','Invalid OTP');
+            return back()->with('danger','Invalid OTP');
           }
         }
 
@@ -96,9 +89,10 @@ class FrontendController extends Controller
             }
             else
             {
-                return back()->with('error','Invalid credentials');
+                return back()->with('danger','Invalid credentials');
             }
 
         }
+
 
 }

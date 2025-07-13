@@ -7,16 +7,21 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\DashboardController    ;
-
+use App\Http\Controllers\Frontend\ShoppingCartController;
 
 Route::get('/',[FrontendController::class,'index'])->name('index');
 
 Route::get('/product-details/{id}', [FrontendController::class,'productDetails'])->name('product.details');
-Route::post('/add-to-cart/', [FrontendController::class,'addToCart'])->name('add.to.cart');
+
 Route::get('/user-login', [FrontendController::class,'userLogin'])->name('user.login');
 Route::post('/user-register', [FrontendController::class,'userRegister'])->name('user.register');
 Route::get('/otp/verification/{otp}', [FrontendController::class,'otpVerification']);
 Route::post('user-login', [FrontendController::class,'userLoginPost'])->name('user.login');
+
+Route::post('/add-to-cart/', [ShoppingCartController::class,'addToCart'])->name('add.to.cart');
+Route::get('/view/cart',[ShoppingCartController::class,'viewCart'])->name('view.cart');
+// Route::get('/remove/cart/{id}',[ShoppingCartController::class,'removeCart'])->name('remove.cart');
+// Route::get('/update/cart/{id}',[ShoppingCartController::class,'updateCart'])->name('update.cart');
 
 
 

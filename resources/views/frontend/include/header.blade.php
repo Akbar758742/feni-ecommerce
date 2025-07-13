@@ -23,7 +23,7 @@
                                     <ul class="ht-setting-list">
                                         <li><a href="login-register.html">My Account</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="login-register.html">Sign In</a></li>
+                                        <li><a href="{{ route('user.login')}}">Sign In</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -169,54 +169,23 @@
                             </li>
                             <!-- Header Middle Wishlist Area End Here -->
                             <!-- Begin Header Mini Cart Area -->
+
                             <li class="hm-minicart">
+                                <a href="{{ route('view.cart') }}">
                                 <div class="hm-minicart-trigger">
                                     <span class="item-icon"></span>
-                                    <span class="item-text">£80.00
-                                        <span class="cart-item-count">2</span>
+                                    <span class="item-text">
+                                        <span class="cart-item-count">
+                                             @auth
+                                                {{ Auth::user()->carts->count() }}
+                                            @else
+                                                0
+                                            @endauth
+                                        </span>
                                     </span>
                                 </div>
-                                <span></span>
-                                <div class="minicart">
-                                    <ul class="minicart-product-list">
-                                        <li>
-                                            <a href="single-product.html" class="minicart-product-image">
-                                                <img src="{{ asset('frontend') }}/images/product/small-size/5.jpg"
-                                                    alt="cart products">
-                                            </a>
-                                            <div class="minicart-product-details">
-                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                <span>£40 x 1</span>
-                                            </div>
-                                            <button class="close" title="Remove">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <a href="single-product.html" class="minicart-product-image">
-                                                <img src="{{ asset('frontend') }}/images/product/small-size/6.jpg"
-                                                    alt="cart products">
-                                            </a>
-                                            <div class="minicart-product-details">
-                                                <h6><a href="single-product.html">Aenean eu tristique</a></h6>
-                                                <span>£40 x 1</span>
-                                            </div>
-                                            <button class="close" title="Remove">
-                                                <i class="fa fa-close"></i>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                    <p class="minicart-total">SUBTOTAL: <span>£80.00</span></p>
-                                    <div class="minicart-button">
-                                        <a href="shopping-cart.html"
-                                            class="li-button li-button-fullwidth li-button-dark">
-                                            <span>View Full Cart</span>
-                                        </a>
-                                        <a href="checkout.html" class="li-button li-button-fullwidth">
-                                            <span>Checkout</span>
-                                        </a>
-                                    </div>
-                                </div>
+                                </a>
+
                             </li>
                             <!-- Header Mini Cart Area End Here -->
                         </ul>
