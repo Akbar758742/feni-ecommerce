@@ -21,7 +21,7 @@ Route::post('user-login', [FrontendController::class,'userLoginPost'])->name('us
 Route::post('/add-to-cart/', [ShoppingCartController::class,'addToCart'])->name('add.to.cart');
 Route::get('/view/cart',[ShoppingCartController::class,'viewCart'])->name('view.cart');
 // Route::get('/remove/cart/{id}',[ShoppingCartController::class,'removeCart'])->name('remove.cart');
-// Route::get('/update/cart/{id}',[ShoppingCartController::class,'updateCart'])->name('update.cart');
+Route::post('/update/cart',[ShoppingCartController::class,'updateCart'])->name('update.cart');
 
 
 

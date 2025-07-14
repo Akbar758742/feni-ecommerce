@@ -16,15 +16,21 @@
             <!--Shopping Cart Area Strat-->
             <div class="Shopping-cart-area pt-60 pb-60">
                 <div class="container">
+                    @if (Session::has('success'))
+                    <p class="alert alert-success">{{ Session::get('success') }}</p>
+                @elseif(Session::has('danger'))
+                    <p class="alert alert-danger">{{ Session::get('danger') }}</p>
+                @endif
+
                     <div class="row">
                         <div class="col-12">
-                            <form action="#">
+                            <form action="{{ route('update.cart') }}" method="POST">
+                                @csrf
                                 <div class="table-content table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th class="li-product-remove">remove</th>
-                                                <th class="li-product-thumbnail">images</th>
                                                 <th class="cart-product-name">Product</th>
                                                 <th class="li-product-price">Unit Price</th>
                                                 <th class="li-product-quantity">Quantity</th>
@@ -32,21 +38,40 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+
+                                            @php
+                                                $total = 0;
+                                                $subtotal = 0;
+                                                $discount=0;
+                                            @endphp
+
                                             @foreach ( $cart_product as $product)
+
+                                             @php
+                                            $discountPrice = $product->product->price - ($product->product->price * $product->product->discount / 100);
+                                            $discount += $product->product->price/100 * $product->product->discount;
+                                            $total += $product->quantity * $product->product->price;
+                                            $subtotal += $product->quantity*$discountPrice;
+
+                                          
+                                            @endphp
+
+                                            <input type="hidden" name="carts[{{ $product->id }}]" value="{{ $product->id }}">
+
                                              <tr>
                                                 <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                <td class="li-product-thumbnail"><a href="#"><img src="images/product/small-size/5.jpg" alt="Li's Product Image"></a></td>
-                                                <td class="li-product-name"><a href="#">Accusantium dolorem1</a></td>
-                                                <td class="li-product-price"><span class="amount">$46.80</span></td>
+                                                
+                                                <td class="li-product-name"><a href="#">{{ $product->product->name }}</a></td>
+                                                <td class="li-product-price"><span class="amount">${{number_format($discountPrice ,2) }}</span></td>
                                                 <td class="quantity">
                                                     <label>Quantity</label>
                                                     <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" value="1" type="text">
+                                                        <input class="cart-plus-minus-box" name="quantity[{{ $product->id }}]"  value="{{ $product->quantity }}" type="text">
                                                         <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
                                                         <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
                                                     </div>
                                                 </td>
-                                                <td class="product-subtotal"><span class="amount">$70.00</span></td>
+                                                <td class="product-subtotal"><span class="amount">${{number_format($product->quantity* $discountPrice,2) }}</span></td>
                                             </tr>
 
                                             @endforeach
@@ -65,19 +90,21 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
                                 <div class="row">
                                     <div class="col-md-5 ml-auto">
                                         <div class="cart-page-total">
                                             <h2>Cart totals</h2>
                                             <ul>
-                                                <li>Subtotal <span>$130.00</span></li>
-                                                <li>Total <span>$130.00</span></li>
+                                                <li>Subtotal <span>{{ $total  }}</span></li>
+                                                <li>discount <span>{{ number_format($discount,2)  }}</span></li>
+                                                <li>Total <span>{{ number_format($subtotal,2) }}</span></li>
                                             </ul>
                                             <a href="#">Proceed to checkout</a>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                           
                         </div>
                     </div>
                 </div>
