@@ -66,7 +66,16 @@
                                         </ul>
                                     </div>
                                     <div class="price-box pt-20">
-                                        <span class="new-price new-price-2">{{ $product->price }}</span>
+                                        <span class=" new-price-2">$
+                                            @php
+                                            $discountedPrice = $product->price - ($product->price * $product->discount / 100);
+                                          
+                                            @endphp
+
+
+                                            <small><del>{{ $product->price }}</del></small>
+                                        </span>
+                                        <span class="new-price new-price-2">$ {{ number_format($discountedPrice,2)  }}</span>
                                     </div>
                                     <div class="product-desc">
                                         <p>
