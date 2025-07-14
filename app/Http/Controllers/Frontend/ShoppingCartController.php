@@ -29,6 +29,9 @@ class ShoppingCartController extends Controller
         }
     public function viewCart()
     {
+        if(!Auth::check()) {
+        return redirect("user-login");
+    }
         $cart_product=shoppingCart::where('user_id',Auth::user()->id)->get();
         return view('frontend.cart' ,compact('cart_product'));
     }
