@@ -32,7 +32,10 @@
                                     <tr>
                                         <th class="li-product-remove">remove</th>
                                         <th class="cart-product-name">Product</th>
+
+
                                         <th class="li-product-price">Unit Price</th>
+                                        <th class="li-product-price">discounted Price</th>
                                         <th class="li-product-quantity">Quantity</th>
                                         <th class="li-product-subtotal">Total</th>
                                     </tr>
@@ -66,6 +69,8 @@
 
                                             <td class="li-product-name"><a href="#">{{ $product->product->name }}</a>
                                             </td>
+                                            <td class="li-product-price"><span
+                                                    class="amount">${{ number_format($unitPrice , 2) }}</span></td>
                                             <td class="li-product-price"><span
                                                     class="amount">${{ number_format($discountPrice, 2) }}</span></td>
                                             <td class="quantity">
@@ -104,9 +109,9 @@
                                 <h2>Cart totals</h2>
                                 <ul>
 
-                                     <li>Total <span>{{ $total }}</span></li>
-                                    <li>discount <span>-{{ number_format($discount, 2) }}</span></li>
-                                    <li>Subtotal <span> ={{ number_format($subtotal, 2) }}</span></li>
+                                     <li>Total <span>${{ $total }}</span></li>
+                                    <li>discount <span>-${{ number_format($discount, 2) }}</span></li>
+                                    <li>Subtotal <span> =${{ number_format($subtotal, 2) }}</span></li>
 
                                 </ul>
                                 <a href="#">Proceed to checkout</a>
