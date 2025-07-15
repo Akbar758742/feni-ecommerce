@@ -109,9 +109,7 @@
                                 <h2>Cart totals</h2>
                                 <ul>
 
-                                     <li>Total <span>{{ $total }}</span></li>
-                                    <li>discount <span>-{{ number_format($discount, 2) }}</span></li>
-                                    <li>Subtotal <span> ={{ number_format($subtotal, 2) }}</span></li>
+                                     
                                      <li>Total <span>${{ $total }}</span></li>
                                     <li>discount <span>-${{ number_format($discount, 2) }}</span></li>
                                     <li>Subtotal <span> =${{ number_format($subtotal, 2) }}</span></li>
