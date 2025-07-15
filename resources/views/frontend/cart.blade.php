@@ -49,9 +49,12 @@
 
                                              @php
                                             $discountPrice = $product->product->price - ($product->product->price * $product->product->discount / 100);
+                                            echo $discountPrice;
+
                                             $discount += $product->product->price/100 * $product->product->discount;
                                             $total += $product->quantity * $product->product->price;
                                             $subtotal += $product->quantity*$discountPrice;
+
 
                                           
                                             @endphp
