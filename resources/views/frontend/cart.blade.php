@@ -109,73 +109,16 @@
                                 <h2>Cart totals</h2>
                                 <ul>
 
+                                     <li>Total <span>{{ $total }}</span></li>
+                                    <li>discount <span>-{{ number_format($discount, 2) }}</span></li>
+                                    <li>Subtotal <span> ={{ number_format($subtotal, 2) }}</span></li>
                                      <li>Total <span>${{ $total }}</span></li>
                                     <li>discount <span>-${{ number_format($discount, 2) }}</span></li>
                                     <li>Subtotal <span> =${{ number_format($subtotal, 2) }}</span></li>
 
-                                            @foreach ( $cart_product as $product)
-
-                                             @php
-                                            $discountPrice = $product->product->price - ($product->product->price * $product->product->discount / 100);
-                                            echo $discountPrice;
-
-                                            $discount += $product->product->price/100 * $product->product->discount;
-                                            $total += $product->quantity * $product->product->price;
-                                            $subtotal += $product->quantity*$discountPrice;
-
-
-                                          
-                                            @endphp
-
-                                            <input type="hidden" name="carts[{{ $product->id }}]" value="{{ $product->id }}">
-
-                                             <tr>
-                                                <td class="li-product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
-                                                
-                                                <td class="li-product-name"><a href="#">{{ $product->product->name }}</a></td>
-                                                <td class="li-product-price"><span class="amount">${{number_format($discountPrice ,2) }}</span></td>
-                                                <td class="quantity">
-                                                    <label>Quantity</label>
-                                                    <div class="cart-plus-minus">
-                                                        <input class="cart-plus-minus-box" name="quantity[{{ $product->id }}]"  value="{{ $product->quantity }}" type="text">
-                                                        <div class="dec qtybutton"><i class="fa fa-angle-down"></i></div>
-                                                        <div class="inc qtybutton"><i class="fa fa-angle-up"></i></div>
-                                                    </div>
-                                                </td>
-                                                <td class="product-subtotal"><span class="amount">${{number_format($product->quantity* $discountPrice,2) }}</span></td>
-                                            </tr>
-
-                                            @endforeach
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="coupon-all">
-
-                                            <div class="coupon2">
-                                                <input class="button" name="update_cart" value="Update cart" type="submit">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                                <div class="row">
-                                    <div class="col-md-5 ml-auto">
-                                        <div class="cart-page-total">
-                                            <h2>Cart totals</h2>
-                                            <ul>
-                                                <li>Subtotal <span>{{ $total  }}</span></li>
-                                                <li>discount <span>{{ number_format($discount,2)  }}</span></li>
-                                                <li>Total <span>{{ number_format($subtotal,2) }}</span></li>
-                                            </ul>
-                                            <a href="#">Proceed to checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                           
+                                </ul>
+                                <a href="#">Proceed to checkout</a>
+                            </div>
                         </div>
                     </div>
 
