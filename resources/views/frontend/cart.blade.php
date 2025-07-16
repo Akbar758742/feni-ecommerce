@@ -55,9 +55,10 @@
                                             $discountAmount = ($unitPrice * $unitDiscount) / 100;
                                             $discountPrice = $unitPrice - $discountAmount;
 
-                                            $subtotal += $product->quantity * $discountPrice;
+
+                                               $subtotal += $product->quantity * $unitPrice;
                                             $discount += $product->quantity * $discountAmount;
-                                            $total += $product->quantity * $unitPrice;
+                                             $total  += $product->quantity * $discountPrice;
 
                                         @endphp
 
@@ -109,13 +110,13 @@
                                 <h2>Cart totals</h2>
                                 <ul>
 
-                                     
-                                     <li>Total <span>${{ $total }}</span></li>
+
+                                     <li>Subtotal  <span>${{ $subtotal}}</span></li>
                                     <li>discount <span>-${{ number_format($discount, 2) }}</span></li>
-                                    <li>Subtotal <span> =${{ number_format($subtotal, 2) }}</span></li>
+                                    <li>total <span> =${{ number_format( $total , 2) }}</span></li>
 
                                 </ul>
-                                <a href="#">Proceed to checkout</a>
+                                <a href="{{ route('checkout' )}}">Proceed to checkout</a>
                             </div>
                         </div>
                     </div>

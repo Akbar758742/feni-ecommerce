@@ -1,6 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
-    
+
 <!-- index28:48-->
 <head>
         <meta charset="utf-8">
@@ -88,7 +88,7 @@
                                                 <img src="{{asset('frontend')}}/images/product/large-size/6.jpg" alt="product image">
                                             </div>
                                         </div>
-                                        <div class="product-details-thumbs slider-thumbs-1">                                        
+                                        <div class="product-details-thumbs slider-thumbs-1">
                                             <div class="sm-image"><img src="{{asset('frontend')}}/images/product/small-size/1.jpg" alt="product image thumb"></div>
                                             <div class="sm-image"><img src="{{asset('frontend')}}/images/product/small-size/2.jpg" alt="product image thumb"></div>
                                             <div class="sm-image"><img src="{{asset('frontend')}}/images/product/small-size/3.jpg" alt="product image thumb"></div>
@@ -166,7 +166,7 @@
                         </div>
                     </div>
                 </div>
-            </div>   
+            </div>
             <!-- Quick View | Modal Area End Here -->
         </div>
         <!-- Body Wrapper End Here -->
@@ -212,7 +212,9 @@
         <script src="{{asset('frontend')}}/js/scrollUp.min.js"></script>
         <!-- Main/Activator js -->
         <script src="{{asset('frontend')}}/js/main.js"></script>
+
+        @stack('script')
     </body>
 
 <!-- index30:23-->
-</html>  
+</html>

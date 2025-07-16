@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\DashboardController    ;
 use App\Http\Controllers\Frontend\ShoppingCartController;
+use App\Models\shoppingCart;
 
 Route::get('/',[FrontendController::class,'index'])->name('index');
 
@@ -22,6 +23,9 @@ Route::post('/add-to-cart/', [ShoppingCartController::class,'addToCart'])->name(
 Route::get('/view/cart',[ShoppingCartController::class,'viewCart'])->name('view.cart');
 // Route::get('/remove/cart/{id}',[ShoppingCartController::class,'removeCart'])->name('remove.cart');
 Route::post('/update/cart',[ShoppingCartController::class,'updateCart'])->name('update.cart');
+
+Route::get('/checkout',[shoppingCartController::class,'checkout'])->name('checkout');
+Route::post('/order-store',[shoppingCartController::class,'orderStore'])->name('order.store');
 
 
 
