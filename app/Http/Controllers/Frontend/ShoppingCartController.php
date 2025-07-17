@@ -67,10 +67,19 @@ class ShoppingCartController extends Controller
 
     public function orderStore(Request $request)
     {
-         Stripe::setApiKey(env('STRIPE_SECRET'));
+        // Validate the request
+        $request->validate([
+            'total_amount' => 'required|numeric',
+            'stripeToken' => 'required'
+        ]);
+
+        // Convert to float and ensure it's numeric
+        $amount = (float) $request->total_amount;
+        
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
         Charge::create ([
-                "amount" => $request->total_amount * 100,
+                "amount" => (int) ($amount * 100), // Convert to cents and ensure integer
                 "currency" => "usd",
                 "source" => $request->stripeToken,
                 "description" => "Test payment from itsolutionstuff.com."
