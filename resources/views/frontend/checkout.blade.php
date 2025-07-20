@@ -16,12 +16,16 @@
     <!--Checkout Area Strat-->
     <div class="checkout-area pt-60 pb-30">
         <div class="container">
-            <div class="row">
+      @if (Session::has('success'))
+                <p class="alert alert-success">{{ Session::get('success') }}</p>
+            @elseif(Session::has('danger'))
+                <p class="alert alert-danger">{{ Session::get('danger') }}</p>
+            @endif
 
-            </div>
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <form action="#">
+                    <form id='checkout-form' method='post' action="{{ route('order.store') }}">
+                        @csrf
                         <div class="checkbox-form">
                             <h3>shipping info Details</h3>
 
@@ -50,20 +54,20 @@
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Address <span class="required">*</span></label>
-                                            <input placeholder="Street address" type="text" name="address">
+                                            <input placeholder="Street address" type="text" name="customer_address">
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Email Address <span class="required">*</span></label>
-                                            <input placeholder="" type="email" name="email">
+                                            <input placeholder="" type="email" name="customer_email">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Mobile<span class="required">*</span></label>
-                                            <input type="text" name="phone">
+                                            <input type="text" name="customer_mobile">
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="your-order">
@@ -135,6 +139,7 @@
                                 </tfoot>
                             </table>
                         </div>
+                        <input type="hidden" name="total_amount" value="{{ number_format($total, 2) }}">
                         <div class="payment-method">
                             <div class="payment-accordion">
                                 <div id="accordion">
@@ -152,34 +157,25 @@
 
                                         <div id="collapseThree" class="collapse" data-parent="#accordion">
                                             <div class="card-body">
-
-                                                @session('success')
+                                                @if (Session::has('success'))
                                                     <div class="alert alert-success" role="alert">
-                                                        {{ $value }}
+                                                        {{ Session::get('success') }}
                                                     </div>
-                                                @endsession
+                                                @endif
 
-                                                <form id='checkout-form' method='post' action="{{ route('order.store') }}">
-                                                    @csrf
-
-                                                    <strong>Name:</strong>
-                                                    <input type="input" class="form-control" name="name"
-                                                        placeholder="Enter Name">
-
-                                                    <input type='hidden' name='stripeToken' id='stripe-token-id'>
-                                                    <input type="hidden" name="total_amount" value="{{ number_format($total, 2) }}">
-                                                    <br>
-                                                    <div id="card-element" class="form-control"></div>
-                                                    <button id='pay-btn' class="btn btn-success mt-3" type="button"
-                                                        style="margin-top: 20px; width: 100%;padding: 7px;"
-                                                        onclick="createToken()">PAY ${{ number_format($total, 2) }}
-                                                    </button>
-                                                    <div class="order-button-payment">
-                                                        <input value="Place order" type="submit">
-                                                    </div>
-                                                    <form>
-
-
+                                                <strong>Name:</strong>
+                                                <input type="input" class="form-control" name="name"
+                                                    placeholder="Enter Name">
+                                                <input type='hidden' name='stripeToken' id='stripe-token-id'>
+                                                <input type="hidden" name="total_amount"
+                                                    value="{{ number_format($total, 2, '.', '') }}">
+                                                <br>
+                                                <div id="card-element" class="form-control"></div>
+                                                <button id='pay-btn' class="btn btn-success mt-3" type="button"
+                                                    style="margin-top: 20px; width: 100%;padding: 7px;"
+                                                    onclick="createToken()">PAY ${{ number_format($total, 2) }}
+                                                </button>
+                                                </form>
                                             </div>
 
 

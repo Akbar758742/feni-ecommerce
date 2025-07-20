@@ -6,6 +6,11 @@
     <!-- Begin Slider With Banner Area -->
     <div class="slider-with-banner">
         <div class="container">
+            @if (Session::has('success'))
+                <p class="alert alert-success">{{ Session::get('success') }}</p>
+            @elseif(Session::has('danger'))
+                <p class="alert alert-danger">{{ Session::get('danger') }}</p>
+            @endif
             <div class="row">
                 <!-- Begin Slider Area -->
                 <div class="col-lg-8 col-md-8">
@@ -77,6 +82,7 @@
     <!-- Begin Li's Laptop Product Area -->
     <section class="product-area li-laptop-product pt-60 pb-45">
         <div class="container">
+
             <div class="row">
                 <!-- Begin Li's Section Area -->
                 <div class="col-lg-12">

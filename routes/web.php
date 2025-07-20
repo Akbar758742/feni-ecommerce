@@ -66,6 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::post('get-subcategory', [ProductController::class,'getSubCategory'])->name('get-subcategory');
 
 
+    Route::get('my-orders',[shoppingCartController::class,'myOrder'])->name('user.order');
+
+
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

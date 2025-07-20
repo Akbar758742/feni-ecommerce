@@ -21,9 +21,26 @@
                                 <div class="ht-setting-trigger"><span>Setting</span></div>
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
-                                        <li><a href="login-register.html">My Account</a></li>
+                                        @if (Auth::check())
+                                            <li><a href="{{ route('user.order') }}">My order</a></li>
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}" class="logout-item">
+                                                    @csrf
+
+                                                    <x-responsive-nav-link :href="route('logout')"
+                                                        onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+
+                                                      {{ __('Log Out') }}
+                                                    </x-responsive-nav-link>
+                                                </form>
+                                            </li>
+                                        @else
+                                            <li><a href="{{ route('user.login') }}">Login</a></li>
+                                            <li><a href="{{ route('user.login') }}">Register</a></li>
+                                        @endif
+
                                         <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="{{ route('user.login')}}">Sign In</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -172,18 +189,18 @@
 
                             <li class="hm-minicart">
                                 <a href="{{ route('view.cart') }}">
-                                <div class="hm-minicart-trigger">
-                                    <span class="item-icon"></span>
-                                    <span class="item-text">
-                                        <span class="cart-item-count">
-                                             @auth
-                                                {{ Auth::user()->carts->count() }}
-                                            @else
-                                                0
-                                            @endauth
+                                    <div class="hm-minicart-trigger">
+                                        <span class="item-icon"></span>
+                                        <span class="item-text">
+                                            <span class="cart-item-count">
+                                                @auth
+                                                    {{ Auth::user()->carts->count() }}
+                                                @else
+                                                    0
+                                                @endauth
+                                            </span>
                                         </span>
-                                    </span>
-                                </div>
+                                    </div>
                                 </a>
 
                             </li>

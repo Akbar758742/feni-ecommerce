@@ -32,7 +32,7 @@ class FrontendController extends Controller
             return view('frontend.product-details',compact('product'));
         }
 
-
+        
 
         public function userLogin()
         {
