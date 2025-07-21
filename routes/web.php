@@ -67,6 +67,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('my-orders',[shoppingCartController::class,'myOrder'])->name('user.order');
+    Route::get('admin/order', [ProductController::class,'adminOrder'])->name('admin.order');
+
+   
 
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

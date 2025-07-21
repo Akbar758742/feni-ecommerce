@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\Backend\Upload;
 use App\Models\Backend\Product;
@@ -9,6 +11,7 @@ use App\Models\Backend\Category;
 use Illuminate\Support\Facades\DB;
 use App\Models\Backend\SubCategory;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -125,15 +128,14 @@ class ProductController extends Controller
 
 
             if ($request->hasFile('image')) {
-                 foreach ($row->images as $item) {
-                    $upload=Upload::find($item->id);
+                foreach ($row->images as $item) {
+                    $upload = Upload::find($item->id);
                     $filePath = public_path($upload->file_path);
                     if (file_exists($filePath)) {
                         unlink($filePath);
                     }
                     $upload->delete();
-
-                 }
+                }
 
                 foreach ($images as $item) {
                     $var = date_create();
@@ -169,8 +171,6 @@ class ProductController extends Controller
 
             return redirect()->back()->with('danger', 'product not updated');
         }
-
-
     }
 
     public function destroy($id)
@@ -179,13 +179,13 @@ class ProductController extends Controller
 
         if ($Product) {
             foreach ($Product->images as $item) {
-            $upload=Upload::find($item->id);
-            $filePath = public_path($upload->file_path);
-            if (file_exists($filePath)) {
-                unlink($filePath);
+                $upload = Upload::find($item->id);
+                $filePath = public_path($upload->file_path);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
             }
-
-        } $Product->delete();
+            $Product->delete();
             return redirect(route('product'))->with('success', 'product deleted successfully');
         }
         return redirect()->back()->with('danger', 'product not deleted');
@@ -195,5 +195,11 @@ class ProductController extends Controller
     {
         $subcategories = SubCategory::where('category_id', $request->category_id)->get();
         return response()->json(['subcategories' => $subcategories]);
+    }
+
+    public function adminOrder()
+    {
+        $orders = Order::paginate(10); // Adjust the pagination as needed
+        return view('backend.admin-order', compact('orders'));
     }
 }
