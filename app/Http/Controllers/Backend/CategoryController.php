@@ -41,7 +41,7 @@ class CategoryController extends Controller
         return view('backend.category.edit', compact('category'));
     }
     public function update(UpdateStorePostRequest $request, $id)
-    {
+    {  
         $category = Category::find($id);
         $category->name = $request->name;
         $category->status = $request->status;

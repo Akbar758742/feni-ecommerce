@@ -67,7 +67,7 @@
                                     <td>{{ $category->order }}</td>
                                     <td class="{{ $category->status == 1 ? 'text-success' : 'text-danger' }}">{{ $category->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <a href="{{ route('product.edit', $category->id) }}" class="btn btn-info text-white .table-card">Edit</a>
+                                        <a href="{{ route('category.edit', $category->id) }}" class="btn btn-info text-white .table-card">Edit</a>
                                         <a href="{{ route('product.destroy', $category->id) }}" onclick="return confirm('Are you sure you want to delete this category?')" class="btn btn-warning text-white .table-card">Delete</a>
                                     </td>
                                 </tr>
