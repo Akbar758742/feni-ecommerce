@@ -162,7 +162,7 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect(route('product'))->with('success', 'update successfully');
+            return redirect(route('product'))->with('success', 'product update successfully');
         } catch (\Exception $e) {
             // dd($e);
 
