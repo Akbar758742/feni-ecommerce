@@ -42,7 +42,7 @@ class CategoryController extends Controller
     }
     //jjj
     public function update(UpdateStorePostRequest $request, $id)
-    {   
+    {
         $category = Category::find($id);
         $category->name = $request->name;
         $category->status = $request->status;
