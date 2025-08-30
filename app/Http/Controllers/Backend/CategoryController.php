@@ -40,8 +40,9 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('backend.category.edit', compact('category'));
     }
+    //jjj
     public function update(UpdateStorePostRequest $request, $id)
-    {  
+    {
         $category = Category::find($id);
         $category->name = $request->name;
         $category->status = $request->status;
