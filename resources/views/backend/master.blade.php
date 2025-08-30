@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -14,9 +14,32 @@
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendor/charts/chartist-bundle/chartist.css">
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendor/charts/morris-bundle/morris.css">
-    <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet"
+        href="{{ asset('backend') }}/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="{{ asset('backend') }}/assets/vendor/charts/c3charts/c3.css">
-    <link rel="stylesheet" href="{{ asset('backend') }}/{{ asset('backend') }}/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet"
+        href="{{ asset('backend') }}/{{ asset('backend') }}/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+   <!-- Fix for header and notifications -->
+<style>
+    /* Reset the fixed header to static position */
+    .dashboard-header .navbar.fixed-top {
+        position: static !important;
+    }
+
+    /* Remove the spacing that was needed for fixed header */
+    .dashboard-main-wrapper {
+        padding-top: 0 !important;
+    }
+
+    /* Place notifications at the very top */
+    .fl-flasher,
+    .fl-flasher.fl-container,
+    #toast-container {
+        position: fixed !important;
+        z-index: 2147483647 !important;
+        top: 0 !important;
+    }
+</style>
     <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
 </head>
 
@@ -43,11 +66,11 @@
         <!-- wrapper  -->
         <!-- ============================================================== -->
         <div class="dashboard-wrapper">
-           @yield('mainContent')
+            @yield('mainContent')
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-           @include('backend.include.footer')
+            @include('backend.include.footer')
             <!-- ============================================================== -->
             <!-- end footer -->
             <!-- ============================================================== -->
@@ -80,7 +103,7 @@
     <script src="{{ asset('backend') }}/assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="{{ asset('backend') }}/assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/js/dashboard-ecommerce.js"></script>
-     @stack('body-scripts')
+    @stack('body-scripts')
 </body>
 
 </html>
