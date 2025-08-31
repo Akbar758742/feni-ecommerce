@@ -69,7 +69,7 @@
                                         <span class=" new-price-2">$
                                             @php
                                             $discountedPrice = $product->price - ($product->price * $product->discount / 100);
-                                          
+
                                             @endphp
 
 
